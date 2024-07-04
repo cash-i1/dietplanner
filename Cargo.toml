@@ -5,3 +5,5 @@ edition = "2021"
 
 [dependencies]
 leptos = { version = "0.6.12", features = ["csr"] }
+leptos-use = { version = "0.10.10", features = ["serde"] }
+serde = "1.0.203"
