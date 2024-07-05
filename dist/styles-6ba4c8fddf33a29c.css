@@ -40,6 +40,10 @@ table {
   border-radius: 10px;
 }
 
+table > * {
+  box-shadow: inset 0px 0px 1px black;
+}
+
 button {
   color: var(--white1);
   background-color: var(--grey3);
@@ -70,9 +74,23 @@ tr.total td {
   font-weight: 1000;
 }
 
+tr.total {
+  position: sticky;
+  bottom: 0;
+  box-shadow: inset 0px 0px 3px black;
+  border: 6px solid var(--grey4);
+}
+
 th {
   font-size: 20px;
   font-weight: 1000;
+}
+
+tr.food-header {
+  position: sticky;
+  top: 0;
+  box-shadow: inset 0px 0px 3px black;
+  border: 6px solid var(--grey4);
 }
 
 tr:nth-child(even) {

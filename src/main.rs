@@ -43,7 +43,7 @@ fn FoodList() -> impl IntoView {
     view! {
         <div class="food-list">
             <table>
-                <tr>
+                <tr class="food-header">
                     <th>food</th>
                     <th>calories</th>
                     <th>protein</th>
@@ -138,7 +138,14 @@ fn AddFoodItem() -> impl IntoView {
             </table>
             <button
                 on:click=move |_| {
-                    set_food_items.update(|i| i.push(food_item.get()));
+                    if food_item.get().name.is_empty()
+                    || food_item.get().calories < 0.0 
+                    || food_item.get().protein < 0.0 {
+
+
+                    } else {
+                        set_food_items.update(|i| i.push(food_item.get()));
+                    }
                 }
             >add</button>
             <br/>
