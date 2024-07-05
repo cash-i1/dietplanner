@@ -48,37 +48,38 @@ fn FoodList() -> impl IntoView {
                     <th>calories</th>
                     <th>protein</th>
                 </tr>
-                { move || {
-                    food_items.get()
-                        .iter()
-                        .map(|i| view! {
-                            <tr>
-                                <td>{i.name()}</td>
-                                <td>{i.calories_fmt()}</td>
-                                <td>{i.protein_fmt()}</td>
-                            </tr>
-                        })
-                        .collect_view()
-                          }
+                {
+                    move || {
+                        food_items.get()
+                            .iter()
+                            .map(|i| view! {
+                                <tr>
+                                    <td>{i.name()}</td>
+                                    <td>{i.calories_fmt()}</td>
+                                    <td>{i.protein_fmt()}</td>
+                                </tr>
+                            })
+                            .collect_view()
+                        }
                 }
                 {
                     move || {
-                    let mut food_items_sum = FoodItem::new("TOTAL", 0., 0.);
-                    let _ = food_items.get()
-                        .iter()
-                        .inspect(|i| {
-                            food_items_sum.protein += i.protein;
-                            food_items_sum.calories += i.calories;
-                        })
-                        .for_each(drop); //wtf does this do
+                        let mut food_items_sum = FoodItem::new("TOTAL", 0., 0.);
+                        let _ = food_items.get()
+                            .iter()
+                            .inspect(|i| {
+                                food_items_sum.protein += i.protein;
+                                food_items_sum.calories += i.calories;
+                            })
+                            .for_each(drop); //wtf does this do
 
-                    view! {
-                        <tr>
-                            <td>TOTAL</td>
-                            <td>{food_items_sum.calories_fmt()}</td>
-                            <td>{food_items_sum.protein_fmt()}</td>
-                        </tr>
-                    }
+                        view! {
+                            <tr class="total">
+                                <td>TOTAL</td>
+                                <td>{food_items_sum.calories_fmt()}</td>
+                                <td>{food_items_sum.protein_fmt()}</td>
+                            </tr>
+                        }
                     }
                 }
             </table>
@@ -95,51 +96,53 @@ fn AddFoodItem() -> impl IntoView {
 
     view! {
         <h2>add an item</h2>
-        <button
-            on:click=move |_| {
-                reset_food_items()
-            }
-        >reset diet tracker</button>
-        <table>
-            <tr>
-                <td>
-                    <input 
-                        type="text"
-                        placeholder="food name"
-                        on:input=move |ev| {
-                            let val = event_target_value(&ev);
-                            set_food_item.update(|i| i.name = val);
-                        }
-                    />
-                </td>
-                <td>
-                    <input 
-                        type="number"
-                        placeholder="calories"
-                        on:input=move |ev| {
-                            let val = event_target_value(&ev);
-                            set_food_item.update(|i| i.calories = val.parse::<f32>().unwrap_or(0.));
-                        }
-                    />
-                </td>
-                <td>
-                    <input 
-                        type="number"
-                        placeholder="protein"
-                        on:input=move |ev| {
-                            let val = event_target_value(&ev);
-                            set_food_item.update(|i| i.protein = val.parse::<f32>().unwrap_or(0.));
-                        }
-                    />
-                </td>
-            </tr>
-        </table>
-        <button
-            on:click=move |_| {
-                set_food_items.update(|i| i.push(food_item.get()));
-            }
-        >add</button>
-        <br/>
+        <div class="add-food-item">
+            <button
+                on:click=move |_| {
+                    reset_food_items()
+                }
+            >reset diet tracker</button>
+            <table>
+                <tr>
+                    <td>
+                        <input
+                            type="text"
+                            placeholder="food name"
+                            on:input=move |ev| {
+                                let val = event_target_value(&ev);
+                                set_food_item.update(|i| i.name = val);
+                            }
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="number"
+                            placeholder="calories"
+                            on:input=move |ev| {
+                                let val = event_target_value(&ev);
+                                set_food_item.update(|i| i.calories = val.parse::<f32>().unwrap_or(0.));
+                            }
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="number"
+                            placeholder="protein"
+                            on:input=move |ev| {
+                                let val = event_target_value(&ev);
+                                set_food_item.update(|i| i.protein = val.parse::<f32>().unwrap_or(0.));
+                            }
+                        />
+                    </td>
+                </tr>
+            </table>
+            <button
+                on:click=move |_| {
+                    set_food_items.update(|i| i.push(food_item.get()));
+                }
+            >add</button>
+            <br/>
+        </div>
     }
 }
 

@@ -2,6 +2,7 @@
   --grey1: rgb(15, 15, 15);
   --grey2: rgb(25, 25, 25);
   --grey3: rgb(35, 35, 35);
+  --grey4: rgb(45, 45, 45);
   --white1: rgb(255, 255, 255);
 }
 
@@ -32,21 +33,46 @@ h1 {
 
 table {
   font-family: "Lato", sans-serif;
-  border-collapse: collapse;
+  border-spacing: 0px;
+  border: 6px solid var(--grey4);
+  box-shadow: 0px 0px 15px black;
   width: 100%;
+  border-radius: 10px;
+}
+
+button {
+  color: var(--white1);
+  background-color: var(--grey3);
+  font-family: "Lato", sans-serif;
+  box-shadow: 0px 0px 15px black;
+  border-radius: 10px;
+  border-color: var(--grey4);
 }
 
 td,
 th {
-  border: 1px solid var(--white1);
   text-align: left;
   padding: 8px;
   color: var(--white1);
 }
 
+div.add-food-item {
+  display: flex;
+  margin: 10px;
+}
+
+div.add-food-item button {
+    margin: 10px;
+}
+
+tr.total td {
+  font-size: 20px;
+  font-weight: 1000;
+}
+
 th {
-    font-size: 20px;
-    font-weight: 1000;
+  font-size: 20px;
+  font-weight: 1000;
 }
 
 tr:nth-child(even) {
