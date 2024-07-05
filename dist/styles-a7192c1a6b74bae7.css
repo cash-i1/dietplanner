@@ -22,7 +22,6 @@ h1 {
 }
 
 .center-box {
-  border: 5px red;
   width: 50%;
   margin: 0 auto;
 }
@@ -66,7 +65,7 @@ div.add-food-item {
 }
 
 div.add-food-item button {
-    margin: 10px;
+  margin: 10px;
 }
 
 tr.total td {
@@ -99,4 +98,24 @@ tr:nth-child(even) {
 
 tr:nth-child(odd) {
   background-color: var(--grey3);
+}
+
+@media (max-width: 1490px) {
+  .center-box {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 932px) {
+  .center-box {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 786px) {
+    body {
+        display: none;
+    }
 }

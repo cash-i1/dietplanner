@@ -1,6 +1,6 @@
 use std::iter::Sum;
 
-use leptos::{logging::log, *};
+use leptos::{html::ToHtmlElement, logging::log, *};
 use leptos_use::storage::use_local_storage;
 use leptos_use::utils::JsonCodec;
 use serde::{Deserialize, Serialize};
@@ -34,11 +34,6 @@ impl FoodItem {
 fn FoodList() -> impl IntoView {
     let (food_items, set_food_items, _) =
         use_local_storage::<Vec<FoodItem>, JsonCodec>("food_items");
-
-    // let food_items = vec![
-    //     FoodItem::new("egg", 12., 20.),
-    //     FoodItem::new("banana", 129., 10.),
-    // ];
 
     view! {
         <div class="food-list">
@@ -139,9 +134,8 @@ fn AddFoodItem() -> impl IntoView {
             <button
                 on:click=move |_| {
                     if food_item.get().name.is_empty()
-                    || food_item.get().calories < 0.0 
-                    || food_item.get().protein < 0.0 {
-
+                    || food_item.get().calories == 0.0 
+                    || food_item.get().protein == 0.0 {
 
                     } else {
                         set_food_items.update(|i| i.push(food_item.get()));
@@ -165,6 +159,7 @@ fn Home() -> impl IntoView {
     view! {
         <div class="root">
             <div class="center-box">
+                <div id="notification-box"></div>
                 <h1>diet tracker</h1>
                 <AddFoodItem/>
                 <FoodList/>
