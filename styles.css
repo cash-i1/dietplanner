@@ -115,7 +115,7 @@ tr:nth-child(odd) {
 }
 
 @media (max-width: 786px) {
-    body {
-        display: none;
-    }
+  body {
+    display: none;
+  }
 }
